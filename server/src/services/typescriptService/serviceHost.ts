@@ -214,6 +214,7 @@ export function getServiceHost(
             doc = updatedScriptRegionDocuments.refreshAndGet(
               TextDocument.create(uri.toString(), 'vue', 0, tsModule.sys.readFile(fileName) || '')
             );
+            localScriptRegionDocuments.set(fileName, doc);
           }
           return getScriptKind(tsModule, doc.languageId);
         } else if (isVirtualVueTemplateFile(fileName)) {
@@ -270,6 +271,7 @@ export function getServiceHost(
             doc = updatedScriptRegionDocuments.refreshAndGet(
               TextDocument.create(uri.toString(), 'vue', 0, tsModule.sys.readFile(resolvedFileName) || '')
             );
+            localScriptRegionDocuments.set(resolvedFileName, doc);
           }
 
           const extension =
@@ -343,6 +345,8 @@ export function getServiceHost(
           // this works for .vue files that aren't even loaded by VS Code yet.
           const rawVueFileText = tsModule.sys.readFile(fileFsPath) || '';
           fileText = parseVueScript(rawVueFileText);
+          const newDoc = TextDocument.create(Uri.file(fileFsPath).toString(), 'vue', 0, fileText);
+          localScriptRegionDocuments.set(fileFsPath, newDoc);
         }
 
         return {
