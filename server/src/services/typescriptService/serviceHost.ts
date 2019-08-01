@@ -129,11 +129,11 @@ export function getServiceHost(
     const fileFsPath = getFileFsPath(doc.uri);
     const filePath = getFilePath(doc.uri);
     // When file is not in language service, add it
-    if (!localScriptRegionDocuments.has(fileFsPath)) {
-      if (fileFsPath.endsWith('.vue') || fileFsPath.endsWith('.vue.template')) {
-        scriptFileNameSet.add(filePath);
-      }
+    // if (!localScriptRegionDocuments.has(fileFsPath)) {
+    if (fileFsPath.endsWith('.vue') || fileFsPath.endsWith('.vue.template')) {
+      scriptFileNameSet.add(filePath);
     }
+    // }
 
     if (isVirtualVueTemplateFile(fileFsPath)) {
       localScriptRegionDocuments.set(fileFsPath, doc);
@@ -150,11 +150,11 @@ export function getServiceHost(
     const fileFsPath = getFileFsPath(doc.uri);
     const filePath = getFilePath(doc.uri);
     // When file is not in language service, add it
-    if (!localScriptRegionDocuments.has(fileFsPath)) {
-      if (fileFsPath.endsWith('.vue') || fileFsPath.endsWith('.vue.template')) {
-        scriptFileNameSet.add(filePath);
-      }
+    // if (!localScriptRegionDocuments.has(fileFsPath)) {
+    if (fileFsPath.endsWith('.vue') || fileFsPath.endsWith('.vue.template')) {
+      scriptFileNameSet.add(filePath);
     }
+    // }
 
     if (!currentScriptDoc || doc.uri !== currentScriptDoc.uri || doc.version !== currentScriptDoc.version) {
       currentScriptDoc = updatedScriptRegionDocuments.refreshAndGet(doc)!;
